@@ -24,4 +24,10 @@ public class BaseSteps {
         basePage.autoLoanSectionLink.click();
         return this;
     }
+
+    @Step("Navigate to credit card page")
+    public CreditCardSteps navigateToCreditCardPage(){
+     basePage.creditCardPageLink.click();
+     return new CreditCardSteps(page);
+    }
 }
