@@ -7,10 +7,13 @@ import com.microsoft.playwright.options.AriaRole;
 public class BasePage {
 
     public Locator forMeLink,
-            autoLoanSectionLink;
+            autoLoanSectionLink,
+            goToTbcCardsButton;
 
     public BasePage(Page page) {
         forMeLink = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("ჩემთვის"));
         autoLoanSectionLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ავტო სესხი"));
+        goToTbcCardsButton = page.locator("//a[@href='/ka/tbc-card']//button[text()='ვრცლად']");
+
     }
 }
