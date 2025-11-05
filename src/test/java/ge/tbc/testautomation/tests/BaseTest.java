@@ -7,28 +7,20 @@ import org.testng.annotations.*;
 import static ge.tbc.testautomation.data.Constants.BASE_URL;
 
 public class BaseTest {
-    Playwright playwright;
-    Browser browser;
-    BrowserContext browserContext;
-    Page page;
     BaseSteps baseSteps;
     private boolean isFirstRun = true;
 
-    @BeforeTest
-    public void setUp() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false)
-                .setSlowMo(50)
-        );
-        browserContext = browser.newContext();
-        page = browserContext.newPage();
-        baseSteps = new BaseSteps(page);
-    }
+    protected Playwright playwright;
+    protected Browser browser;
+    protected BrowserContext browserContext;
+    protected Page page;
 
     @BeforeClass
-    public void navigateToBaseUrl() {
-        page.navigate(BASE_URL);
+    public void setUp() {
+        playwright = Playwright.create();
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        browserContext = browser.newContext();
+        page = browserContext.newPage();
         if (isFirstRun) {
             baseSteps.rejectCookies();
             isFirstRun = false;

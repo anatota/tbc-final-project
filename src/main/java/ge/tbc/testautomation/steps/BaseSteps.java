@@ -101,4 +101,60 @@ public class BaseSteps {
         basePage.creditCardPageLink.click();
         return new CreditCardSteps(page);
     }
+    @Step("Accept All Cookies")
+    public BaseSteps acceptAllCookies() {
+        basePage.acceptAllCookies.click();
+        return this;
+    }
+    @Step("Check Cookie Colours ")
+    public BaseSteps CheckCookieCollorsForNonGPRCountries() {
+        page.reload();
+        String backgroundColor = basePage.acceptAllCookies.evaluate("element => window.getComputedStyle(element).backgroundColor").toString();
+        String backgroundColorofRejectButton = basePage.rejectCookieButton.evaluate("element => window.getComputedStyle(element).backgroundColor").toString();
+        String backgroundcolorofCustomise = basePage.customiseCookieButton.evaluate("element => window.getComputedStyle(element).backgroundColor").toString();
+        assert backgroundColor.equals("rgb(0, 173, 238)") : "Accept button color is not blue";
+        assert backgroundColorofRejectButton.equals("rgb(255, 255, 255)") : "Reject button color is not grey";
+        assert backgroundcolorofCustomise.equals("rgb(255, 255, 255)") : "Customise button color is not grey";
+        return this ;
+    }
+    @Step("Click on Language Switcher button")
+    public BaseSteps clickOnLanguageSwitcherBtn() {
+        //side note :allowing waitin  after switching language cuss page needs to reaload
+        String current_Language = basePage.languageSwitcherBtn.textContent().trim();
+        basePage.languageSwitcherBtn.click();
+        String url = page.url();
+        try {
+            for (int i = 0; i < 150; i++) { // Polling mechanism with a timeout
+                String newText = basePage.languageSwitcherBtn.textContent().trim();
+
+                Thread.sleep(100);
+                if (!newText.equals(current_Language ) && !page.url().equals(url)) {
+                    break;
+                }
+                Thread.sleep(100);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore the interrupted status
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+        return this;
+    }
+    @Step("reload page with wait")
+    public BaseSteps realoadPage(){
+        page.reload();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore the interrupted status
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+        return this;
+    }
+    @Step("assert that any Google analytics cookie is not present ")
+    public BaseSteps ckeckforGoogleAnalytics(){
+        boolean cookieFound = page.context().cookies().stream()
+                .anyMatch(cookie -> cookie.name.contains("_ga"));
+        assert cookieFound : " cookie containing '_ga' found!";
+        return this;
+    }
 }

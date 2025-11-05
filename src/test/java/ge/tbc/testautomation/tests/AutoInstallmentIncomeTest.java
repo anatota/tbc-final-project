@@ -4,7 +4,10 @@ import ge.tbc.testautomation.steps.AutoInstallmentSteps;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-@Listeners(ge.tbc.testautomation.tests.allurescreenshotlistener.class)
+
+import static ge.tbc.testautomation.data.Constants.BASE_URL;
+
+@Listeners(allurescreenshotlistener.class)
 public class AutoInstallmentIncomeTest extends BaseTest {
     AutoInstallmentSteps autoInstallmentSteps;
 
