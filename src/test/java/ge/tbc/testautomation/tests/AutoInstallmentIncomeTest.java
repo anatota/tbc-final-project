@@ -45,5 +45,4 @@ public class AutoInstallmentIncomeTest extends BaseTest {
                 .clickOnTakeLoanBtn()
                 .validateFormIsVisible();
     }
-
 }

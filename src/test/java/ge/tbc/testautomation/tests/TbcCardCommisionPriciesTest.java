@@ -34,6 +34,4 @@ public class TbcCardCommisionPriciesTest extends BaseTest {
                 .clickOnMonthlyBtn()
                 .validateCardsMonthlyPricies();
     }
-
-
 }

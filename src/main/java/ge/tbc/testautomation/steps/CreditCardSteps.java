@@ -8,14 +8,11 @@ import io.qameta.allure.Step;
 
 public class CreditCardSteps {
     Page page;
-
     CreditCardPage creditCardPage;
-
 
     public CreditCardSteps(Page page) {
         this.page = page;
         creditCardPage = new CreditCardPage(page);
-
     }
 
     @Step("Verify whether credit card comparison container is visible")

@@ -29,7 +29,7 @@ public class BaseTest {
     @BeforeClass
     public void navigateToBaseUrl() {
         page.navigate(BASE_URL);
-        if(isFirstRun) {
+        if (isFirstRun) {
             baseSteps.rejectCookies();
             isFirstRun = false;
         }

@@ -3,13 +3,13 @@ package ge.tbc.testautomation.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-public class TbcCardPage extends BasePage{
+public class TbcCardPage extends BasePage {
     public Locator monthlyPriciesBtn,
-    annualPriciesBtn,
+            annualPriciesBtn,
             tbcCard,
             conceptCard,
-            concept360Card
-    ;
+            concept360Card;
+
     public TbcCardPage(Page page) {
         super(page);
         annualPriciesBtn = page.locator("xpath=//div[@class='tbcx-pw-tab-segment tbcx-pw-tab-segment--condensed']//button[.//span[text()='ყოველწლიურად']]").first();

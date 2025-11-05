@@ -5,9 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
 public class YouthWizardPage extends BasePage {
-    public Locator idNumberField;
-    public Locator continueBtn;
-    public Locator mobileNumberField;
+    public Locator idNumberField,
+            continueBtn,
+            mobileNumberField;
 
     public YouthWizardPage(Page page) {
         super(page);
