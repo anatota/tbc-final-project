@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 public class BasePage {
     public Locator cookieReject;
     public Locator forMeLink,
+    creditCardPageLink,
             autoLoanSectionLink;
     public Locator schoolCardNavigation;
 
@@ -15,5 +16,6 @@ public class BasePage {
         forMeLink = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("ჩემთვის"));
         autoLoanSectionLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ავტო სესხი"));
         schoolCardNavigation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("მოსწავლის ბარათი"));
+        creditCardPageLink = page.locator("//a[.//text()='საკრედიტო ბარათი']");
     }
 }

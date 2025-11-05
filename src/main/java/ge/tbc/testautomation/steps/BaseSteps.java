@@ -30,7 +30,7 @@ public class BaseSteps {
         basePage.autoLoanSectionLink.click();
         return this;
     }
-
+  
     @Step("Click on reject cookies")
     public BaseSteps rejectCookies() {
         basePage.cookieReject.click();
@@ -76,5 +76,10 @@ public class BaseSteps {
         String regex = String.format(".*%s.*", className);
         assertThat(locator).hasClass(Pattern.compile(regex));
         return this;
+      
+    @Step("Navigate to credit card page")
+    public CreditCardSteps navigateToCreditCardPage(){
+     basePage.creditCardPageLink.click();
+     return new CreditCardSteps(page);
     }
 }
