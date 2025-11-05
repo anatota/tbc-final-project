@@ -6,8 +6,8 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 import ge.tbc.testautomation.pages.BasePage;
 import io.qameta.allure.Step;
 
+import static org.testng.Assert.assertEquals;
 import java.util.regex.Pattern;
-
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class BaseSteps {
@@ -28,6 +28,17 @@ public class BaseSteps {
     @Step("Click on 'Auto Loan' section link")
     public BaseSteps clickOnAutoLoanSectionLink() {
         basePage.autoLoanSectionLink.click();
+        return this;
+    }
+  
+    @Step("\"აიღე თიბისი ბარათი\"-ზე გადასვლა \"ვრცლად\"-ზე  კლიკით\n")
+    public BaseSteps clickOnGoToTbcCardsBtn() {
+        basePage.goToTbcCardsButton.first().click();
+        return this;
+    }
+    @Step("თიბისი ბარათების გვერდის ჩატვირთვა")
+    public BaseSteps validateCurrentPage(String url) {
+        assertEquals(url, page.url());
         return this;
     }
   
