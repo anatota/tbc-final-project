@@ -23,7 +23,7 @@ public class BaseTest {
 
         playwright = Playwright.create();
         BrowserType.LaunchOptions options = new BrowserType.LaunchOptions()
-                .setHeadless(false)
+                .setHeadless(true)
                 .setArgs(List.of("--window-position=0,0"));
 
         switch (browserType.toLowerCase()) {
