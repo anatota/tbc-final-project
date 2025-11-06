@@ -1,14 +1,18 @@
 package ge.tbc.testautomation.tests;
 
 import ge.tbc.testautomation.steps.BaseSteps;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static ge.tbc.testautomation.data.Constants.BASE_URL;
 
 public class RequestCreditCardTest extends BaseTest {
     BaseSteps baseSteps;
 
-    @BeforeMethod
+    @BeforeClass
     public void initializeSteps() {
+        page.navigate(BASE_URL);
         baseSteps = new BaseSteps(page);
     }
 

@@ -77,8 +77,12 @@ public class AutoInstallmentSteps extends BaseSteps {
     }
 
     @Step("Click on 'Take Loan' button")
-    public AutoInstallmentSteps clickOnTakeLoanBtn() {
-        autoInstallmentPage.takeLoanBtn.click();
+    public AutoInstallmentSteps clickOnTakeLoanBtn() {// so that it can fit bot languages automatically
+        if (autoInstallmentPage.takeLoanBtn.isVisible()) {
+            autoInstallmentPage.takeLoanBtn.click();
+        } else {
+            autoInstallmentPage.takeLoanBtnEng.click();
+        }
         return this;
     }
 
@@ -87,4 +91,28 @@ public class AutoInstallmentSteps extends BaseSteps {
         PlaywrightAssertions.assertThat(autoInstallmentPage.loanForm).isVisible();
         return this;
     }
+    @Step("fill in Ammount ")
+    public AutoInstallmentSteps fillInAmmount(String ammount) {
+        autoInstallmentPage.calculatorInputFields.nth(0).fill(ammount);
+        return this;
+    }
+    @Step("fill in Period ")
+    public AutoInstallmentSteps fillInPeriod(String period) {
+        autoInstallmentPage.calculatorInputFields.nth(1).fill(period);
+        return this;
+    }
+    @Step("Calculate monthly payment for {0} GEL at {1}% over {2} months")
+    public AutoInstallmentSteps verifycalculateExpectedMonthlyPayment(double principalAmount, int months ) {
+        double annualInterestRate = Double.parseDouble(autoInstallmentPage.outputedFields.nth(2).innerText().replaceAll("[^\\d.]", ""));        // 1. Convert annual percentage rate to a monthly decimal rate
+        double monthlyRate = (annualInterestRate / 100.0) / 12.0;
+        // 2. Calculate the compound interest factor
+        double powerTerm = Math.pow(1 + monthlyRate, months);
+        // 3. Apply the standard annuity formula
+        double monthlyPayment = principalAmount * (monthlyRate * powerTerm) / (powerTerm - 1);
+        // 4. Round to 2 decimal places to match financial calculations
+        monthlyPayment = Math.round(monthlyPayment * 100.0) / 100.0;
+        validateInstallmentAmount(monthlyPayment + "₾");
+        return this ;
+    }
+
 }

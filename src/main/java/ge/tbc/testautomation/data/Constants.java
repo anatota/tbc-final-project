@@ -11,4 +11,6 @@ public class Constants {
             DUMMY_FULL_NAME = "John Doe",
             DUMMY_ID = "01020304050",
             DUMMY_PHONE_NUMBER = "577777777";
+            public static final String EXPECTED_ACTIVE_HEADER_TEXT_GEO = "პირადი";
+            public static final String EXPECTED_ACTIVE_HEADER_TEXT_ENG = "Personal";
 }
