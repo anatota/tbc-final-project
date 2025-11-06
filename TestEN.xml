@@ -8,8 +8,7 @@
         <test name="HomePage_pw Mobile Testing">
             <parameter name="device" value="MOBILE"/>
             <classes>
-                <class name="ge.tbc.testautomation.tests.mobile.AutoInstallmentIncomeMobileTest">
-                </class>
+                <class name="ge.tbc.testautomation.tests.mobile.AutoInstallmentIncomeMobileTest"/>
             </classes>
         </test>
 </suite>

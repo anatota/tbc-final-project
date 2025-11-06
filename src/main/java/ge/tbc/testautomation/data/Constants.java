@@ -10,7 +10,13 @@ public class Constants {
             ERROR_MESSAGE_TEXT = "კოდი არასწორია, სცადე ხელახლა შეყვანა",
             DUMMY_FULL_NAME = "John Doe",
             DUMMY_ID = "01020304050",
-            DUMMY_PHONE_NUMBER = "577777777";
-            public static final String EXPECTED_ACTIVE_HEADER_TEXT_GEO = "პირადი";
-            public static final String EXPECTED_ACTIVE_HEADER_TEXT_ENG = "Personal";
+            DUMMY_PHONE_NUMBER = "577777777",
+            EXPECTED_INTEREST_RATE = "15.5% დან",
+            EXPECTED_EFFECTIVE_INTEREST_RATE = "26.13% დან",
+            INCOME = "1000",
+            LOAN_PERIOD = "12",
+            EXPECTED_INSTALLMENT_AMOUNT = "2,762.60₾",
+            EXPECTED_FORM_HEADER_TEXT_GEO = "ავტოგანვადების განაცხადი",
+            EXPECTED_ACTIVE_HEADER_TEXT_GEO = "პირადი",
+            EXPECTED_ACTIVE_HEADER_TEXT_ENG = "Personal";
 }

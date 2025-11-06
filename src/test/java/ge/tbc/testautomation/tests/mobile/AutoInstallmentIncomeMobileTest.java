@@ -14,10 +14,9 @@ import static ge.tbc.testautomation.data.Constants.BASE_URL;
 @Listeners(allurescreenshotlistener.class)
 public class AutoInstallmentIncomeMobileTest extends BaseTest {
     HeaderSteps headerSteps;
-
     AutoInstallmentSteps autoInstallmentSteps;
-
     BaseSteps baseSteps;
+
     @BeforeClass
     public void initializeSteps() {
         page.navigate(BASE_URL);
@@ -30,6 +29,7 @@ public class AutoInstallmentIncomeMobileTest extends BaseTest {
                 .ckeckforGoogleAnalytics()
                 .clickOnLanguageSwitcherBtnMobile();
     }
+
     @Test(description = "Auto Installment Income Verification Mobile ", groups = "Auto Installment Income Verification Mobile")
     public void verifyAutoInstallmentIncomeMobile() {
         headerSteps.clickOnBurgerMenuBtn()

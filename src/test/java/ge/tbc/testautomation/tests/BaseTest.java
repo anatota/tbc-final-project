@@ -6,8 +6,6 @@ import org.testng.annotations.*;
 
 import java.util.List;
 
-import static ge.tbc.testautomation.data.Constants.BASE_URL;
-
 public class BaseTest {
 
     protected Playwright playwright;

@@ -22,7 +22,6 @@ public class AutoInstallmentPage {
             takeLoanBtnEng,
             outputedFields;
 
-
     public AutoInstallmentPage(Page page) {
         autoInstallment = page.locator("//a[contains(@href , '/loans/auto-loan/auto-installment' )]//button");//changed this locator a bit so it fits both languages
         autoInstallmentTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("ავტოგანვადება").setExact(true));
@@ -30,7 +29,7 @@ public class AutoInstallmentPage {
         incomeInputField = page.getByRole(AriaRole.SPINBUTTON, new Page.GetByRoleOptions().setName("შემოსავალი *"));
         loanPeriodInputField = page.locator("#tbcx-text-input-4");
         takeLoanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("arrow-right-outlined აიღე სესხი"));
-        takeLoanBtnEng= page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("arrow-right-outlined Apply for Loan"));
+        takeLoanBtnEng = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("arrow-right-outlined Apply for Loan"));
         installmentAmountField = page.locator(".tbcx-pw-calculated-info__top-title");
         monthlyContributionField = page.locator(".tbcx-pw-calculated-info__rows-item-info.ng-star-inserted");
         monthDividers = page.locator(".slider-dividers");

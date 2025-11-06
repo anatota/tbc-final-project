@@ -14,7 +14,6 @@ public class TbcCardPage extends BasePage {
         super(page);
         annualPriciesBtn = page.locator("xpath=//div[@class='tbcx-pw-tab-segment tbcx-pw-tab-segment--condensed']//button[.//span[text()='ყოველწლიურად']]").first();
         monthlyPriciesBtn = page.locator("xpath=//div[@class='tbcx-pw-tab-segment tbcx-pw-tab-segment--condensed']//button[.//span[text()='ყოველთვიურად']]").first();
-
         tbcCard = page.locator("xpath=//p[@class = 'period-header-cell__period-description__text']").nth(0);
         conceptCard = page.locator("xpath=//p[@class = 'period-header-cell__period-description__text']").nth(1);
         concept360Card = page.locator("xpath=//p[@class = 'period-header-cell__period-description__text']").nth(2);

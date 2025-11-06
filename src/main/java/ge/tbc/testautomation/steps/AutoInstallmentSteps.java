@@ -114,5 +114,4 @@ public class AutoInstallmentSteps extends BaseSteps {
         validateInstallmentAmount(monthlyPayment + "₾");
         return this ;
     }
-
 }

@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static ge.tbc.testautomation.data.Constants.BASE_URL;
+import static ge.tbc.testautomation.data.Constants.*;
 
 @Listeners(allurescreenshotlistener.class)
 public class AutoInstallmentIncomeTest extends BaseTest {
@@ -24,8 +24,8 @@ public class AutoInstallmentIncomeTest extends BaseTest {
                 .clickOnAutoLoanSectionLink();
         autoInstallmentSteps.clickOnAutoInstallmentButton()
                 .validateAutoInstallmentPageIsOpened()
-                .validateInterestRate("15.5% დან")
-                .validateEffectiveInterestRate("26.13% დან");
+                .validateInterestRate(EXPECTED_INTEREST_RATE)
+                .validateEffectiveInterestRate(EXPECTED_EFFECTIVE_INTEREST_RATE);
     }
 
     @Test(priority = 2, description = "შემოსავლის გამოთვლის არჩევა")
@@ -38,10 +38,10 @@ public class AutoInstallmentIncomeTest extends BaseTest {
     @Test(priority = 3, description = "თანხის და ვადის მითითება")
     public void validateIncomeAndPeriodTest() {
         autoInstallmentSteps
-                .enterIncome("1000")
-                .enterLoanPeriod("12")
-                .validateInstallmentAmount("2,762.60₾")
-                .validateMonthlyContribution("1000");
+                .enterIncome(INCOME)
+                .enterLoanPeriod(LOAN_PERIOD)
+                .validateInstallmentAmount(EXPECTED_INSTALLMENT_AMOUNT)
+                .validateMonthlyContribution(INCOME);
     }
 
     @Test(priority = 4, description = "სესხის აღება")

@@ -2,7 +2,6 @@ package ge.tbc.testautomation.tests;
 
 import ge.tbc.testautomation.steps.BaseSteps;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static ge.tbc.testautomation.data.Constants.BASE_URL;
