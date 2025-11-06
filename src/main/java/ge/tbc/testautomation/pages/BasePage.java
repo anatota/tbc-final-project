@@ -18,6 +18,7 @@ public class BasePage {
     public final Locator rejectCookieButton;
     public final Locator customiseCookieButton;
     public final Locator languageSwitcherBtn;
+    public final Locator languageSwitcherBtnMobile;
     public BasePage(Page page) {
         this.cookieReject = page.locator("//div[@class='tbcx-pw-cookie-consent']//button[contains(@class, 'secondary')]").getByText("უარყოფა");
         this.forMeLink = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("ჩემთვის"));
@@ -29,6 +30,7 @@ public class BasePage {
         this.rejectCookieButton=page.locator("//div[@class='tbcx-pw-cookie-consent__actions']//button").nth(2);
         this.customiseCookieButton=page.locator("//div[@class='tbcx-pw-cookie-consent__actions']//button").nth(1);
         this.languageSwitcherBtn=page.locator("tbcx-lang-switcher").first();
+        this.languageSwitcherBtnMobile=page.locator("tbcx-lang-switcher").nth(2);
 
     }
 

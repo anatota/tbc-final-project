@@ -39,6 +39,23 @@ public class HeaderSteps {
         pageObj.autoLoanCategoryBtn.click();
         return this;
     }
+    @Step("click Loan category Hamburger menu")
+    public HeaderSteps clickLoanCategoryHamburgerMenu() {
+        pageObj.loanHamburgerMenuBtn.nth(1).click();
 
+        return this;
+    }
+    @Step("click auto loans mobile")
+    public HeaderSteps clickAutoLoansMobile() {
+        //sleep 2000
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore the interrupted status
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+        pageObj.autoLoanCategoryBtn.nth(1).click();
+        return this;
+    }
 
 }

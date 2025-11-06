@@ -5,4 +5,11 @@
             <package name="ge.tbc.testautomation.tests"/>
         </packages>
     </test>
+        <test name="HomePage_pw Mobile Testing">
+            <parameter name="device" value="MOBILE"/>
+            <classes>
+                <class name="ge.tbc.testautomation.tests.mobile.AutoInstallmentIncomeMobileTest">
+                </class>
+            </classes>
+        </test>
 </suite>

@@ -24,6 +24,7 @@ import static ge.tbc.testautomation.data.Constants.BASE_URL;
 
      @BeforeClass
      public void initializeSteps() {
+         page.navigate(BASE_URL);
          headerSteps = new HeaderSteps(page);
          autoInstallmentSteps = new AutoInstallmentSteps(page);
          baseSteps = new BaseSteps(page);

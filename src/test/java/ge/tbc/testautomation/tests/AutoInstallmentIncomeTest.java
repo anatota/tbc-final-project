@@ -13,6 +13,7 @@ public class AutoInstallmentIncomeTest extends BaseTest {
 
     @BeforeClass
     public void initializeSteps() {
+        page.navigate(BASE_URL);
         autoInstallmentSteps = new AutoInstallmentSteps(page);
     }
 

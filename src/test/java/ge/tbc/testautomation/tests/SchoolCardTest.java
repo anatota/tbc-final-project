@@ -2,14 +2,16 @@ package ge.tbc.testautomation.tests;
 
 import ge.tbc.testautomation.data.Constants;
 import ge.tbc.testautomation.steps.SchoolCardSteps;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SchoolCardTest extends BaseTest {
     SchoolCardSteps schoolCardSteps;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUpBM() {
+        page.navigate(Constants.BASE_URL);
         schoolCardSteps = new SchoolCardSteps(page);
     }
 

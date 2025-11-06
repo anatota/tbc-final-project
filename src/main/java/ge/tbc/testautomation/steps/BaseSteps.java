@@ -139,6 +139,17 @@ public class BaseSteps {
         }
         return this;
     }
+    @Step("switch language mobile")
+    public BaseSteps clickOnLanguageSwitcherBtnMobile() {
+        basePage.languageSwitcherBtnMobile.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore the interrupted status
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+        return this;
+    }
     @Step("reload page with wait")
     public BaseSteps realoadPage(){
         page.reload();

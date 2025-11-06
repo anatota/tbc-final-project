@@ -8,11 +8,13 @@ public class Header extends BasePage{
     public final Locator burgerMenuBtn;
     public final Locator activeHeader;
     public final Locator autoLoanCategoryBtn;
+    public final Locator loanHamburgerMenuBtn;
     public Header(Page page) {
         super(page);
         this.personalHeader=page.locator("//div[contains(text(), 'Personal')]").first();
         this.burgerMenuBtn=page.locator(".tbcx-pw-hamburger-menu button");
         this.activeHeader=page.locator("div[class = 'tbcx-pw-navigation-item tbcx-pw-navigation-item--selected']");
-        this.autoLoanCategoryBtn=page.locator("//span[contains(text(), 'Auto Loan')]").first();
+        this.autoLoanCategoryBtn=page.locator("//span[contains(text(), 'Auto Loan')]");
+        this.loanHamburgerMenuBtn=page.locator("//span[contains(text(), 'Loans')]");
     }
 }
