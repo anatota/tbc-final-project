@@ -17,7 +17,7 @@ public class AutoInstallmentIncomeTest extends BaseTest {
         autoInstallmentSteps = new AutoInstallmentSteps(page);
     }
 
-    @Test(priority = 1, description = "ავტოგანვადების გვერდზე ნავიგაცია")
+    @Test(priority = 1, description = "ავტოგანვადების გვერდზე ნავიგაცია - KAN-T3")
     public void enterToAutoInstalmentPageTest() {
         autoInstallmentSteps
                 .hoverOnForMeLink()

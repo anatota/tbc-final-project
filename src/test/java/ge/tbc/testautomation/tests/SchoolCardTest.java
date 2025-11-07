@@ -14,7 +14,7 @@ public class SchoolCardTest extends BaseTest {
         schoolCardSteps = new SchoolCardSteps(page);
     }
 
-    @Test(priority = 1, description = "მოსწავლის ბარათის გვერდის გახსნა")
+    @Test(priority = 1, description = "მოსწავლის ბარათის გვერდის გახსნა - KAN-T1")
     public void schoolCardPageTest() {
         schoolCardSteps
                 .navigateToForMe()

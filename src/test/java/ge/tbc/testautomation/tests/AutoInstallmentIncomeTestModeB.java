@@ -30,7 +30,7 @@ public class AutoInstallmentIncomeTestModeB extends BaseTest {
                 .ckeckforGoogleAnalytics();
     }
 
-    @Test(priority = 1, description = "Navigate to Auto Loan Category")
+    @Test(priority = 1, description = "Navigate to Auto Loan Category - KAN-T2")
     public void navigateToAutoLoanCategory() {
         headerSteps
                 .hoverOverPersonalNavItem()

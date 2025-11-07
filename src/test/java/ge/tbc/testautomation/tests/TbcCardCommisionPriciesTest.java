@@ -17,7 +17,7 @@ public class TbcCardCommisionPriciesTest extends BaseTest {
 
     }
 
-    @Test(priority = 1, description = "ბარათების გვერდზე გადასვლა")
+    @Test(priority = 1, description = "ბარათების გვერდზე გადასვლა - KAN-T5")
     public void testGoToCardsPageTest() {
         tbcCardSteps
                 .clickOnGoToTbcCardsBtn()
