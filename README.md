@@ -1,224 +1,132 @@
-# TBC Test Automation Final Project
+# TBC Bank Test Automation Final Project
 
-This repository contains an end-to-end automated test suite for TBC Bank card products (Web UI + API).
-The suite verifies that major customer journeys function correctly and that backend data is accurately reflected on the UI.
-A key part of the project involved **secure API testing that respects TBC’s antiforgery / CSRF protection**.
+Automation and QA project for TBC Bank card-related user journeys across web UI and API layers.
 
----
+This repository combines Playwright-based UI testing, RestAssured API validation, and a small shared framework built with Java, Maven, and TestNG. The strongest part of my contribution was the **School Card feature testing**, including a negative E2E flow, manual validation of the positive flow, and API testing that required solving a real **CSRF / antiforgery token** issue.
 
-# Table of Contents
+## Why This Project Matters
 
-1. Overview
-2. My Role in This Project
-3. Tech Stack
-4. Project Structure
-5. UI Test Coverage
-6. API Test Coverage (Antiforgery / CSRF-Aware Testing)
-7. Negative Scenario: Invalid School Card Code
-8. How to Run the Tests
-9. Extending and Maintaining the Framework
+The project focuses on realistic banking flows where correctness, validation, and secure request handling matter. It covers:
 
----
+- UI test automation for TBC card journeys
+- API validation for marketing offers
+- Shared helpers, page objects, and step classes for maintainability
+- Security-aware request handling for endpoints protected by antiforgery logic
 
-# 1. Overview
+## My Contribution
 
-The automated suite covers:
+My work in this project centered on the **School Card** feature.
 
-* **Web UI flows** for TBC card products:
-  TBC Card, School Card, Credit Card, Auto Installment, Youth Wizard, OTP validation.
-* **API tests** for marketing offers, including antiforgery / CSRF cookie handling.
-* Shared test infrastructure for:
+### 1. Automated E2E negative scenario
 
-    * configuration
-    * Playwright sessions
-    * API clients
-    * page objects and steps
+I worked on the automated negative School Card flow that verifies invalid code handling in the UI. The scenario checks that the application:
 
-The goal is to create stable regression tests that behave like real users (browser + cookies + security mechanisms).
+- rejects an invalid code
+- keeps the user on the current step
+- highlights the field with an error state
+- shows the correct validation message
 
----
+Relevant implementation:
 
-# 2. My Role in This Project
+- [SchoolCardTest.java](src/test/java/ge/tbc/testautomation/tests/SchoolCardTest.java)
+- [SchoolCardSteps.java](src/main/java/ge/tbc/testautomation/steps/SchoolCardSteps.java)
+- [SchoolCardPage.java](src/main/java/ge/tbc/testautomation/pages/SchoolCardPage.java)
 
-My main responsibilities focused on the **API automation**, **security-aware testing**, and **framework design**.
-Specifically, I contributed to:
+### 2. Manual testing of the positive case
 
-* **API automation setup**
-  Implemented RestAssured-based API client structure (`BaseApi`, `OffersApi`) and created the POJOs for marketing offer responses.
+I also tested the positive School Card flow manually and found a meaningful validation defect:
 
-* **Antiforgery / CSRF-aware API testing**
-  Investigated recurring `400 Bad Request` failures and implemented the automated antiforgery cookie extraction flow using Playwright (`CookieHelper`, `ApiSession`).
+- the website accepted **any image upload** instead of validating that the uploaded file was a required document
 
-* **UI and Steps Layer**
-  Contributed to Playwright page objects and steps for School Card flows, validations, and negative scenarios.
+This was useful because it exposed a business-rule gap that automation alone would not necessarily reveal early.
 
-* **Mobile-emulated Playwright Tests**
-  Assisted with the configuration used in `TestEN.xml`.
+### 3. API testing and CSRF issue resolution
 
-* **Project architecture & maintainability**
-  Helped shape the package structure, centralized utilities, and ensured clean separation between pages, steps, and tests.
+My primary API contribution was solving the antiforgery token problem that caused protected requests to fail.
 
-Overall, I focused on making the framework **secure**, **reliable**, and **extensible**, while ensuring both UI and API layers worked together consistently.
+The issue:
 
----
+- API requests worked in browser-like environments but failed in automation with `400 Bad Request`
+- the endpoint required valid frontend cookies and `XSRF-TOKEN`
 
-# 3. Tech Stack
+What I implemented:
 
-* **Language:** Java (framework + tests), JavaScript (performance scripts)
-* **Build tool:** Maven
-* **Test framework:** TestNG (`TestEN.xml`)
-* **UI testing:** Playwright (desktop + mobile emulation)
-* **API testing:** RestAssured
-* **Assertions:** Hamcrest
-* **Reporting:** Allure-compatible screenshot listener + TestNG reports
-* **Utilities:** Custom helpers for cookies, sessions, config
+- fetched frontend cookies through a Playwright browser session
+- extracted the `XSRF-TOKEN`
+- passed cookies and the `x-xsrf-token` header into RestAssured requests
 
----
+Relevant implementation:
 
-# 4. Project Structure
+- [OffersApiTest.java](src/test/java/ge/tbc/testautomation/tests/OffersApiTest.java)
+- [OffersApiSteps.java](src/main/java/ge/tbc/testautomation/steps/OffersApiSteps.java)
+- [OffersApi.java](src/main/java/ge/tbc/testautomation/api/OffersApi.java)
+- [CookieHelper.java](src/main/java/ge/tbc/testautomation/helper/CookieHelper.java)
+- [ApiSession.java](src/main/java/ge/tbc/testautomation/helper/ApiSession.java)
 
-### API Layer – `src/main/java/ge/tbc/testautomation/api`
+## Tech Stack
 
-* `BaseApi.java`, `OffersApi.java`
-* Model classes (`marketing/offers/model`):
-  `MarketingOffersResponse`, `Offer`, `PagingDetails`, `Partner`, `Segment`, `SimpleImage`, `SearchOffersRequest`
+- Java
+- Maven
+- TestNG
+- Playwright
+- RestAssured
+- Hamcrest
 
-### Configuration – `config`
+## Project Structure
 
-* `BaseApiConfig.java` for URLs and API defaults
+```text
+src/
+  main/java/ge/tbc/testautomation/
+    api/        API client layer
+    config/     shared API configuration
+    data/       constants and test data
+    helper/     cookie/session utilities
+    pages/      Playwright page objects
+    steps/      reusable business-flow steps
 
-### Data – `data`
+  test/java/ge/tbc/testautomation/tests/
+    UI tests
+    API tests
+    mobile tests
+```
 
-* `ApiConstants.java`, `Constants.java` for endpoints and paths
+## Test Coverage Overview
 
-### Helper Layer – `helper`
+The repository includes tests for several TBC card-related flows, including:
 
-* `ApiSession.java`, `CookieHelper.java`, `Helper.java`
-  (session handling + antiforgery cookie logic)
+- School Card
+- TBC Card
+- Credit Card
+- Auto Installment
+- Youth-related offers API
+- Mobile-emulated scenarios
 
-### UI Layer – `pages` and `steps`
+From a portfolio perspective, the most important parts of my contribution are:
 
-* Playwright page objects
-* Step classes: `TbcCardSteps`, `SchoolCardSteps`, `CreditCardSteps`, `AutoInstallmentSteps`, etc.
+- negative E2E validation for School Card
+- manual bug discovery in the positive School Card flow
+- API security handling for CSRF-protected requests
 
-### Test Layer – `src/test/java`
+## How to Run
 
-* UI tests
-* Mobile tests (`tests.mobile`)
-* API tests (`OffersApiTest.java`)
-* `BaseTest.java` for environment setup
-* `allurescreenshotlistener.java` for reporting
-
-### Root-level
-
-* `TestEN.xml` (suite)
-* `tbcCardPerformanceTest.js` (performance script)
-
----
-
-# 5. UI Test Coverage
-
-The UI layer follows a **Page Object Model (POM)** plus **Steps** abstraction:
-
-* Pages define locators and low-level actions
-* Steps combine actions into business flows
-* Tests call steps to keep test logic short and readable
-
-Covered flows include:
-
-* Requesting all major TBC cards
-* Filling customer and income data
-* Validation messages and UI correctness
-* Mobile-mode tests executed through Playwright emulation
-
-This structure supports quick addition of new flows with minimal duplication.
-
----
-
-# 6. API Test Coverage – Antiforgery / CSRF-Aware Testing
-
-### 6.1 What we validate
-
-* Marketing offers for the School Card product
-* Correct backend structure and business rules
-* Full consistency between the UI and returned API data
-
-### 6.2 Challenge: `400 Bad Request`
-
-Postman + real browsers worked, but RestAssured failed due to:
-
-* missing antiforgery cookies
-* server-side CSRF validation rejecting requests
-* cookies generated only inside an actual browser session
-
-### 6.3 Implemented Solution: Automated Cookie Handling
-
-To replicate real browser behavior:
-
-1. **Headless Playwright session** loads a TBC page
-2. Antiforgery cookies (e.g., `XSRF-TOKEN`) are extracted
-3. Cookies are passed into RestAssured
-4. API requests succeed with valid security context
-
-### 6.4 Response Validation
-
-Using Hamcrest and model deserialization, tests verify:
-
-* structure
-* non-empty offer lists
-* correct partners/segments
-* valid paging
-* correct UI consistency
-
----
-
-# 7. Negative Scenario: Invalid School Card Code
-
-A dedicated UI flow validates that submitting invalid school/student codes:
-
-* triggers correct error messages
-* prevents navigation to confirmation pages
-* preserves business logic integrity
-
-This scenario is implemented with page objects, steps, and TestNG.
-
----
-
-# 8. How to Run the Tests
-
-Run everything:
+Run the full test suite:
 
 ```bash
 mvn clean test
 ```
 
-Run with TestNG suite:
+Run using the TestNG suite file:
 
 ```bash
 mvn clean test -DsuiteXmlFile=TestEN.xml
 ```
 
-Environment values (base URLs, browser modes, etc.) can be set via Maven profiles or system properties.
+## Summary
 
----
+This project demonstrates that I can contribute across multiple QA layers:
 
-# 9. Extending and Maintaining the Framework
-
-### Add new API tests:
-
-1. Reuse `CookieHelper` & `ApiSession`
-2. Extend API classes or add new ones
-3. Add/modify model classes
-4. Write TestNG tests using the shared cookie-handling logic
-
-### Add new UI tests:
-
-1. Create/extend page objects
-2. Add steps for new flows
-3. Add TestNG test classes for UI or mobile tests
-
-The architecture keeps:
-
-* security logic centralized
-* UI logic clean
-* tests maintainable and readable
+- write readable automated UI tests
+- validate negative scenarios, not only happy paths
+- perform manual testing that uncovers real product defects
+- debug and fix API automation issues related to web security mechanisms
+- work within a maintainable test framework structure
